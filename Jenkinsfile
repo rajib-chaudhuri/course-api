@@ -7,12 +7,20 @@ node{
     {
         echo "Static code analysis"
     }
-    stage('build')
-    {
-        echo "build"
-    }
-    stage('Unit Testing')
-    {
-        echo "unit testing"
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "MAVEN_HOME = ${MAVEN_HOME}"
+                '''
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn package' 
+            }           
+        }
     }
 }
