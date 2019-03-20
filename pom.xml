@@ -20,4 +20,12 @@
 	<properties>
 		<java-verion>1.8</java-verion>
 	</properties>
+	<build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+	</plugins>
+</build>
 </project>
