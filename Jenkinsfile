@@ -1,4 +1,8 @@
-node{
+pipeline {
+    agent any
+    tools {
+        maven 'maven 3.5.2'
+    }
     stage('Checkout')
     {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '4b53a458-6c25-4765-acb2-6e33d865ad4c', url: 'https://github.com/suswan-mondal/course-api.git']]])
