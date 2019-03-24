@@ -4,6 +4,7 @@ node {
    stage('Demo') {
         echo 'Hello world'
         sayHello 'Dave'
+		evenOrOdd(3)
    }
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
