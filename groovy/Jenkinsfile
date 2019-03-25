@@ -5,12 +5,15 @@ node {
         echo 'Hello world'
         //sayHello 'Dave'
 		//evenOrOdd(3)
-		def z = new libraryFunctions()
-		z.checkOutFrom()	
+			
    }
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/suswan-mondal/course-api.git'
+      //git 'https://github.com/suswan-mondal/course-api.git'
+	  
+	  def repo = "https://github.com/suswan-mondal/course-api.git"
+	  def z = new libraryFunctions()
+	  z.checkOutFrom(repo)
       // Get the Maven tool.           
       mvnHome = tool 'mvn3.6'
    }
