@@ -3,15 +3,15 @@ node {
    def mvnHome
    stage('Demo') {
         echo 'Hello world'
-        sayHello 'Dave'
-		evenOrOdd(3)
+        //sayHello 'Dave'
+		//evenOrOdd(3)
+		def z = new libraryFunctions()
+		z.checkOutFrom()	
    }
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/suswan-mondal/course-api.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.           
+      // Get the Maven tool.           
       mvnHome = tool 'mvn3.6'
    }
    stage('Build') {
