@@ -1,18 +1,19 @@
 @Library('dxp-pipeline-library')_
 node {
    def mvnHome
-   stage('Demo') {
-        echo 'Hello world'
+   def z = new libraryFunctions()
+   //stage('Demo') {
+        //echo 'Hello world'
         //sayHello 'Dave'
 		//evenOrOdd(3)
 			
-   }
+  //}
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       //git 'https://github.com/suswan-mondal/course-api.git'
 	  
 	  def repo = "https://github.com/suswan-mondal/course-api.git"
-	  def z = new libraryFunctions()
+	 
 	  z.checkOutFrom(repo)
       // Get the Maven tool.           
       mvnHome = tool 'mvn3.6'
