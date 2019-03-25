@@ -12,19 +12,17 @@ node {
       // Get some code from a GitHub repository
       //git 'https://github.com/suswan-mondal/course-api.git'
 	  
-	  def repo = "https://github.com/suswan-mondal/course-api.git"
-	 
+	  def repo = "https://github.com/suswan-mondal/course-api.git"	 
 	  z.checkOutFrom(repo)
-      // Get the Maven tool.           
-      mvnHome = tool 'mvn3.6'
+     
    }
    stage('Build') {
-      // Run the maven build
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
-      } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-      }
+      
+       // Get the Maven tool.           
+      mvnHome = tool 'mvn3.6'
+	  
+	  // Run the maven build
+	  z.mavenBuild(mvnHome)
    }
    stage('Results') {
      // junit '**/target/surefire-reports/TEST-*.xml'
