@@ -17,6 +17,9 @@ node {
 		// Run the maven build
 		methods.mavenBuild(mvnHome)
 	}
+	stage('Deploy'){
+		pscp C:/Users/Administrator/.jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar  aws_linux_ec2-18-130-243-17:/home/ec2-user
+	}
 	stage('Results') {
 		// junit '**/target/surefire-reports/TEST-*.xml'
 		archive 'target/*.jar'
