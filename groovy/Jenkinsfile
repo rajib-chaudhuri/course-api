@@ -19,7 +19,7 @@ node {
 	}
 	stage('Deploy'){
 		echo "~~~Deploy~~~"
-		bat "echo hello world"
+		bat "set"
 	}
 	stage('Results') {
 		// junit '**/target/surefire-reports/TEST-*.xml'
