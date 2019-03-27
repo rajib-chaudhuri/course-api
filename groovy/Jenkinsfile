@@ -20,7 +20,7 @@ node {
 	stage('Deploy'){
 		echo "~~~Deploy~~~"
 		bat "set"
-		bat "set PATH=%PUTTYY_HOME%;%PATH%"
+		bat "set PATH=%PUTTY_HOME%;%PATH%"
 		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		bat "set"
 		
