@@ -15,7 +15,8 @@ node {
 		mvnHome = tool 'mvn3.6'
 
 		// Run the maven build
-		methods.mavenBuild(mvnHome)
+		//methods.mavenBuild(mvnHome)
+		mavenBuild(mvnHome)
 	}
 	stage('Deploy'){
 		
