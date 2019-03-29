@@ -14,9 +14,9 @@ node {
 		// Get the Maven tool.
 		mvnHome = tool 'mvn3.6'
 
-		// Run the maven build
-		//methods.mavenBuild(mvnHome)
+		// Run the maven build		
 		mavenBuild(mvnHome)
+		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 	}
 	stage('Deploy'){
 		
