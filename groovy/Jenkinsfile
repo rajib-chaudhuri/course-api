@@ -1,12 +1,10 @@
-@Library('dxp-pipeline-library')_
-node {
-	def mvnHome
-	def methods = new libraryFunctions() 
 
-	stage('Preparation') { // for display purposes
-		// Get some code from a GitHub repository
-		def repo = "https://github.com/suswan-mondal/course-api.git"		
-		checkoutFromRepo(repo)
+node {
+	
+
+	stage('Preparation') { 
+		echo "--hello--"
 
 	}
+	
 }
