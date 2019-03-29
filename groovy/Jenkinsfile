@@ -22,7 +22,7 @@ node {
 		
 		//bat "set"		
 		def jarFileName='course-api-0.0.1-SNAPSHOT.jar'
-		deploy(jarFileName)
+		//deploy(jarFileName)
 				
 	}
 	stage('Results') {
