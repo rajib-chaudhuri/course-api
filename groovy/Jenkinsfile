@@ -1,10 +1,32 @@
-
+@Library('dxp-pipeline-library')_
 node {
-	
+	def mvnHome
+	def methods = new libraryFunctions() 
 
-	stage('Preparation') { 
-		echo "--hello--"
+	stage('Preparation') { // for display purposes
+		// Get some code from a GitHub repository
+		def repo = "https://github.com/suswan-mondal/course-api.git"		
+		checkoutFromRepo(repo)
 
 	}
-	
+	stage('Build') {
+
+		// Get the Maven tool.
+		mvnHome = tool 'mvn3.6'
+
+		// Run the maven build
+		//methods.mavenBuild(mvnHome)
+		mavenBuild(mvnHome)
+	}
+	stage('Deploy'){
+		
+		//bat "set"		
+		def jarFileName='course-api-0.0.1-SNAPSHOT.jar'
+		//deploy(jarFileName)
+				
+	}
+	stage('Results') {
+		// junit '**/target/surefire-reports/TEST-*.xml'
+		archive 'target/*.jar'
+	}
 }
