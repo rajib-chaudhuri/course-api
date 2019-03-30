@@ -31,7 +31,8 @@ node {
         } 
 	}
 	state('DockerBuild deploy'){
-		sh 'docker run -p 80:8090 suswan/course'
+		//sh 'docker run -p 80:8090 suswan/course'
+		docker.run("suswan/course")
 	
 	}
 	stage('Deploy'){
