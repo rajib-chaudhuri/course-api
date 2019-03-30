@@ -22,21 +22,24 @@ node {
 	stage ('DockerBuild Image'){
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
-
+		echo "~~~deploy prune image and container done ~~~"
 		app = docker.build("suswan/course")
 		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         } 
+		
+		echo "~~~~~ push to docker hub done~~~~"
 	}
 	state('DockerBuild deploy'){
+		echo "~~~~~ DockerBuild deploy~~~~"
 		//sh 'docker run -p 80:8090 suswan/course'
 		//docker.run("suswan/course")
 	
 	}
 	stage('Deploy'){
-		
+		echo "~~~~~ deploy~~~~"
 		//bat "set"		
 		def jarFileName='course-api-0.0.1-SNAPSHOT.jar'
 		//deploy(jarFileName)
