@@ -32,9 +32,9 @@ node {
 		
 		echo "~~~~~ push to docker hub done~~~~"
 	}
-	state('DockerBuild deploy'){
+	stage('DockerBuild deploy'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		//sh 'docker run -p 80:8090 suswan/course'
+		sh 'docker run -p 80:8090 suswan/course'
 		//docker.run("suswan/course")
 	
 	}
