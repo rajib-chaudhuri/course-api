@@ -20,12 +20,19 @@ node {
 		
 	}
 	stage ('DockerBuild Image'){
+		sh 'docker container prune -f'
+		sh 'docker image prune -a -f'
+
 		 app = docker.build("suswan/course")
 		 
 		 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
           } 
+	}
+	state('DockerBuild deploy'){
+		sh 'docker run -p 80:8090 suswan/course'
+	
 	}
 	stage('Deploy'){
 		
