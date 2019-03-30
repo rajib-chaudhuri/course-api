@@ -20,7 +20,7 @@ node {
 		
 	}
 	stage ('DockerBuild Image'){
-		sh 'docker stop "$(docker ps -a -q)"'
+		sh "docker stop "$(docker ps -a -q)"
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
 		echo "~~~deploy prune image and container done ~~~"
