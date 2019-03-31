@@ -23,8 +23,8 @@ node {
 		//sh 'docker stop \$(docker ps -a -q)'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
-		echo "~~~deploy prune image and container done ~~~"
-		app = docker.build("suswan/course")
+		echo "~~~docker prune image and container done ~~~"
+		app = docker.build("suswan/course2")
 		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
@@ -35,7 +35,7 @@ node {
 	}
 	stage('DockerBuild deploy'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		sh 'docker run -p 80:8090 suswan/course'
+		//sh 'docker run -p 80:8090 suswan/course'
 		//docker.run("suswan/course")
 	
 	}
