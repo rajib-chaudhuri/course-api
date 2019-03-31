@@ -27,7 +27,8 @@ node {
 		app = docker.build("suswan/course")
 		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("${env.BUILD_NUMBER}")
+            //app.push("${env.BUILD_NUMBER}")
+			 app.push("1.0")
             app.push("latest")
         } 
 		
