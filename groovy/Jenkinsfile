@@ -24,7 +24,7 @@ node {
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
 		echo "~~~docker prune image and container done ~~~"
-		app = docker.build("suswan/course2")
+		app = docker.build("suswan/course")
 		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
