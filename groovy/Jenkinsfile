@@ -3,6 +3,13 @@ node {
 	def mvnHome	
 	def methods = new libraryFunctions() 
 
+	stage ('clean') {
+		//sh 'docker stop CourseApiContainer'
+		// def apiContainer = docker.container("CourseApiContainer")
+         //apiContainer.stop()
+		sh 'docker system prune -a --volumes'
+		echo "~~~docker prune image and container done ~~~"
+	}
 	stage('Preparation') { // for display purposes
 		// Get some code from a GitHub repository
 		def repo = "https://github.com/suswan-mondal/course-api.git"		
@@ -26,11 +33,7 @@ node {
 		//sh 'docker container prune -f'
 		//sh 'docker image prune -a -f'
 		
-		sh 'docker stop CourseApiContainer'
-		// def apiContainer = docker.container("CourseApiContainer")
-         //apiContainer.stop()
-		sh 'docker system prune -a --volumes'
-		echo "~~~docker prune image and container done ~~~"
+		
 		app = docker.build("suswan/course")
 		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
