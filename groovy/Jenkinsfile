@@ -4,7 +4,7 @@ node {
 	def methods = new libraryFunctions() 
 
 	stage ('clean') {
-		sh 'docker stop CourseApiContainer'		
+		//sh 'docker stop CourseApiContainer'		
 		sh 'docker system prune -a --volumes -f'
 		echo "~~~docker prune image and container done ~~~~~"
 	}
