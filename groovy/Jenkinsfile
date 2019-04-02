@@ -1,6 +1,6 @@
 @Library('dxp-pipeline-library')_
 node {
-	def mvnHome
+	def mvnHome	
 	def methods = new libraryFunctions() 
 
 	stage('Preparation') { // for display purposes
@@ -21,9 +21,13 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
-		//sh 'docker stop \$(docker ps -a -q)'
-		sh 'docker container prune -f'
-		sh 'docker image prune -a -f'
+		//sh 'docker stop \$(docker ps -a -q)''		
+		//sh 'docker rm CourseApiContainer'		
+		//sh 'docker container prune -f'
+		//sh 'docker image prune -a -f'
+		
+		sh 'docker stop CourseApiContainer'
+		sh 'docker system prune -a --volumes'
 		echo "~~~docker prune image and container done ~~~"
 		app = docker.build("suswan/course")
 		 
@@ -35,9 +39,9 @@ node {
 		
 		echo "~~~~~ push to docker hub done~~~~"
 	}
-	stage('DockerBuild deploy'){
+	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		//sh 'docker run -p 80:8090 suswan/course'
+		sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
 		//docker.run("suswan/course")
 	
 	}
