@@ -6,7 +6,7 @@ node {
 	stage ('clean') {
 		sh 'docker stop CourseApiContainer'		
 		sh 'docker system prune -a --volumes -f'
-		echo "~~~docker prune image and container done ~~~"
+		echo "~~~docker prune image and container done ~~~~"
 	}
 	stage('Preparation') { // for display purposes
 		// Get some code from a GitHub repository
