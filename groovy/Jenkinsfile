@@ -27,8 +27,8 @@ node {
 		//sh 'docker image prune -a -f'
 		
 		//sh 'docker stop CourseApiContainer'
-		 def apiContainer = docker.container("CourseApiContainer")
-         apiContainer.stop()
+		// def apiContainer = docker.container("CourseApiContainer")
+         //apiContainer.stop()
 		sh 'docker system prune -a --volumes'
 		echo "~~~docker prune image and container done ~~~"
 		app = docker.build("suswan/course")
