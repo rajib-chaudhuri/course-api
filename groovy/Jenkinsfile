@@ -4,6 +4,9 @@ node {
 	def methods = new libraryFunctions() 
 
 	stage ('clean') {
+		//if (pipelineContext && pipelineContext.dockerContainer) {
+        //       pipelineContext.dockerContainer.stop()
+        //   }
 		//sh 'docker stop CourseApiContainer'		
 		sh 'docker system prune -a --volumes -f'
 		echo "~~~docker prune image and container done ~~~~~"
