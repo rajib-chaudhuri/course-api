@@ -43,7 +43,7 @@ node {
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'	
+		sh 'nohup runContainer.sh > /dev/null 2>&1 &'	
 	}
 	stage('Deploy'){
 		echo "~~~~~ deploy~~~~"
