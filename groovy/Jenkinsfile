@@ -29,6 +29,7 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
+		sh 'cd groovy/'
 		sh 'pwd'			
 		
 		app = docker.build("suswan/course")		 
