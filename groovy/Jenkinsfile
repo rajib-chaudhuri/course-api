@@ -9,7 +9,7 @@ node {
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
-		echo "~~~docker prune image and container done ~~~~~"
+		echo "~~~docker cleaning done ~~~~~"
 	}
 	stage('Preparation') { // for display purposes
 		// Get some code from a GitHub repository
@@ -29,12 +29,9 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
-		sh 'pwd'
+		sh 'pwd'			
 		
-		
-		
-		app = docker.build("suswan/course")
-		 
+		app = docker.build("suswan/course")		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
         //app.push("${env.BUILD_NUMBER}")
 		app.push("1.0")
@@ -45,9 +42,7 @@ node {
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
-		//docker.run("suswan/course")
-	
+		sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'	
 	}
 	stage('Deploy'){
 		echo "~~~~~ deploy~~~~"
