@@ -29,16 +29,17 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
-		sh '#!/Bin/sh'
-		sh 'if(docker rm courseapicontainer >/dev/null 2>&1); then'
-		sh 'echo "exist"'
-		sh 'else'
-		sh 'echo "not exist"'
-		sh 'fi'
+		sh 'bash stopContainer.sh' 
+		//sh '#!/Bin/sh'
+		//sh 'if(docker rm courseapicontainer >/dev/null 2>&1); then'
+		//sh 'echo "exist"'
+		//sh 'else'
+		//sh 'echo "not exist"'
+		//sh 'fi'
 		//sh 'docker stop \$(docker ps -a -q)''		
 		//sh 'docker rm CourseApiContainer'		
-		//sh 'docker container prune -f'
-		//sh 'docker image prune -a -f'
+		sh 'docker container prune -f'
+		sh 'docker image prune -a -f'
 		
 		
 		app = docker.build("suswan/course")
