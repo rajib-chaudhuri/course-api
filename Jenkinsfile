@@ -24,12 +24,12 @@ node {
 
 		// Run the maven builds		
 		mavenBuild(mvnHome)
-		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce/groovy' 
+		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 		
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
-		sh 'cd groovy/'
+		//sh 'cd groovy/'
 		sh 'pwd'			
 		
 		app = docker.build("suswan/course")		 
