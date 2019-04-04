@@ -4,10 +4,7 @@ node {
 	def methods = new libraryFunctions() 
 
 	stage ('clean') {
-		//if (pipelineContext && pipelineContext.dockerContainer) {
-        //       pipelineContext.dockerContainer.stop()
-        //   }
-		//sh 'docker stop CourseApiContainer'
+		
 		sh 'bash stopContainer.sh' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
@@ -27,20 +24,12 @@ node {
 
 		// Run the maven builds		
 		mavenBuild(mvnHome)
-		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
+		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce/groovy' 
 		
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"
-		//sh 'bash stopContainer.sh' 
-		//sh '#!/Bin/sh'
-		//sh 'if(docker rm courseapicontainer >/dev/null 2>&1); then'
-		//sh 'echo "exist"'
-		//sh 'else'
-		//sh 'echo "not exist"'
-		//sh 'fi'
-		//sh 'docker stop \$(docker ps -a -q)''		
-		//sh 'docker rm CourseApiContainer'		
+		sh 'pwd'
 		
 		
 		
