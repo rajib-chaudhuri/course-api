@@ -28,10 +28,7 @@ node {
 		
 	}
 	stage ('DockerBuild Image'){
-		echo "~~~~~ DockerBuild Images~~~~"
-		//sh 'cd groovy/'
-		sh 'pwd'			
-		
+		echo "~~~~~ DockerBuild Images~~~~"	
 		app = docker.build("suswan/course")		 
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
         //app.push("${env.BUILD_NUMBER}")
