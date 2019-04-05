@@ -16,7 +16,18 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
-	
+	<distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://172.31.2.113:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Snapshot Releases</name>
+            <url>http://172.31.2.113:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 	<properties>
 		<java-verion>1.8</java-verion>
 	</properties>
