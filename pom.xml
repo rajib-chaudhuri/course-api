@@ -20,12 +20,12 @@
         <repository>
             <id>deployment</id>
             <name>Internal Releases</name>
-            <url>http://172.31.2.113:8081/repository/maven-releases/</url>
+            <url>http://ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081/repository/DXP-RELEASE/</url>
         </repository>
         <snapshotRepository>
             <id>deployment</id>
             <name>Internal Snapshot Releases</name>
-            <url>http://172.31.2.113:8081/repository/maven-snapshots/</url>
+            <url>http://ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081/repository/DXP-SNAPSHOT/</url>
         </snapshotRepository>
     </distributionManagement>
 	<properties>
