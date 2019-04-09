@@ -39,7 +39,7 @@ node {
 		filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
 		// Print some info from the artifact found
 		echo "suswan---------------->>>${pom.packaging}"
-		echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+		echo "~~name-->>> ${filesByGlob[0].name}~~path-->>> ${filesByGlob[0].path}~~directory-->>> ${filesByGlob[0].directory}~~length-->>> ${filesByGlob[0].length}~~lastModified-->>> ${filesByGlob[0].lastModified}"
 		
 	}
 	stage ('DockerBuild Image'){
