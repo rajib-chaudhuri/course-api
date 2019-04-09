@@ -37,10 +37,16 @@ node {
 		pom = readMavenPom file: "pom.xml";
 		// Find built artifact under target folder
 		filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-		// Print some info from the artifact found
-		echo "suswan---------------->>>${pom.packaging}"
+		// Print some info from the artifact found		
 		echo "~~name-->>> ${filesByGlob[0].name}~~path-->>> ${filesByGlob[0].path}~~directory-->>> ${filesByGlob[0].directory}~~length-->>> ${filesByGlob[0].length}~~lastModified-->>> ${filesByGlob[0].lastModified}"
-		
+		// Extract the path from the File found
+		artifactPath = filesByGlob[0].path;
+		// Assign to a boolean response verifying If the artifact name exists
+		artifactExists = fileExists artifactPath;
+		echo "~~artifactExists-->>> artifactExists";
+		if(artifactExists) {
+			echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+		}
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	
