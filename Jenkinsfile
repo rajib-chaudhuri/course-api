@@ -2,7 +2,11 @@
 node {
 	def mvnHome	
 	def methods = new libraryFunctions() 
-
+	// This can be nexus3 or nexus2
+	def NEXUS_VERSION = "nexus3"
+	// This can be http or https
+	def NEXUS_PROTOCOL = "http"
+	
 	stage ('clean') {
 		
 		sh 'bash stopContainer.sh' 		
