@@ -67,6 +67,7 @@ node {
 		// Extract the path from the File found
 		artifactPath = filesByGlob[0].path;
 		fileName = filesByGlob[0].name
+		fileVersion ="0.0.1-SNAPSHOT"
 		// Assign to a boolean response verifying If the artifact name exists
 		artifactExists = fileExists artifactPath;
 		echo "~~artifactExists-->>> artifactExists";
@@ -77,7 +78,7 @@ node {
 				protocol: NEXUS_PROTOCOL,
 				nexusUrl: NEXUS_URL,
 				groupId: pom.groupId,
-				version: pom.version,
+				version: fileVersion,
 				repository: NEXUS_REPOSITORY,
 				credentialsId: NEXUS_CREDENTIAL_ID,
 				artifacts: [
