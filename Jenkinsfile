@@ -66,11 +66,12 @@ node {
 		echo "~~name-->>> ${filesByGlob[0].name}~~path-->>> ${filesByGlob[0].path}~~directory-->>> ${filesByGlob[0].directory}~~length-->>> ${filesByGlob[0].length}~~lastModified-->>> ${filesByGlob[0].lastModified}"
 		// Extract the path from the File found
 		artifactPath = filesByGlob[0].path;
+		fileName = filesByGlob[0].name
 		// Assign to a boolean response verifying If the artifact name exists
 		artifactExists = fileExists artifactPath;
 		echo "~~artifactExists-->>> artifactExists";
 		if(artifactExists) {
-			echo "~~~File artifactPath-->> ${artifactPath}, group-->> ${pom.groupId}, packaging-->> ${pom.packaging}, version-->> ${pom.version}";
+			echo "~~~File artifactPath-->> ${artifactPath}, fileName-->> ${fileName}, group-->> ${pom.groupId}, packaging-->> ${pom.packaging}, version-->> ${pom.version}";
 			nexusArtifactUploader(
 				nexusVersion: NEXUS_VERSION,
 				protocol: NEXUS_PROTOCOL,
@@ -84,12 +85,8 @@ node {
 					[artifactId: pom.artifactId,
 					classifier: '',
 					file: artifactPath,
-					type: pom.packaging],
-					// Lets upload the pom.xml file for additional information for Transitive dependencies
-					[artifactId: pom.artifactId,
-					classifier: '',
-					file: "pom.xml",
-					type: "pom"]
+					name: fileName,
+					type: pom.packaging]					
 				]
 			);
 		}
