@@ -30,7 +30,7 @@ node {
 	stage('Build') {
 
 		// Get the Maven tool.
-		mvnHome = tool 'mvn3.6'
+		mvnHome = tool 'mvn3.6' 
 
 		// Run the maven builds		
 		mavenBuild(mvnHome)
