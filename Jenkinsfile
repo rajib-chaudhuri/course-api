@@ -30,14 +30,16 @@ node {
 	stage('Build') {
 
 		// Get the Maven tool.
-		mvnHome = tool 'mvn3.6' 
+		mvnHome = tool 'mvn3.6'
 
 		// Run the maven builds		
 		mavenBuild(mvnHome)
 		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 		
 	}
-	
+	stage('publish to nexus'){
+		publishNexus(NEXUS_VERSION,NEXUS_PROTOCOL,NEXUS_URL,NEXUS_REPOSITORY,NEXUS_CREDENTIAL_ID)
+	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	
 		app = docker.build("suswan/course")		 
