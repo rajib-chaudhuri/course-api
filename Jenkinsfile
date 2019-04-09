@@ -6,6 +6,12 @@ node {
 	def NEXUS_VERSION = "nexus3"
 	// This can be http or https
 	def NEXUS_PROTOCOL = "http"
+	// Where your Nexus is running
+	def NEXUS_URL = "ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081"
+	// Repository where we will upload the artifact
+	def NEXUS_REPOSITORY = "DXP-SNAPSHOT"
+	// Jenkins credential id to authenticate to Nexus OSS
+	def NEXUS_CREDENTIAL_ID = "nexus-credentials-dxp"
 	
 	stage ('clean') {
 		
@@ -46,6 +52,27 @@ node {
 		echo "~~artifactExists-->>> artifactExists";
 		if(artifactExists) {
 			echo "~~~File artifactPath-->> ${artifactPath}, group-->> ${pom.groupId}, packaging-->> ${pom.packaging}, version-->> ${pom.version}";
+			nexusArtifactUploader(
+				nexusVersion: NEXUS_VERSION,
+				protocol: NEXUS_PROTOCOL,
+				nexusUrl: NEXUS_URL,
+				groupId: pom.groupId,
+				version: pom.version,
+				repository: NEXUS_REPOSITORY,
+				credentialsId: NEXUS_CREDENTIAL_ID,
+				artifacts: [
+					// Artifact generated such as .jar, .ear and .war files.
+					[artifactId: pom.artifactId,
+					classifier: '',
+					file: artifactPath,
+					type: pom.packaging],
+					// Lets upload the pom.xml file for additional information for Transitive dependencies
+					[artifactId: pom.artifactId,
+					classifier: '',
+					file: "pom.xml",
+					type: "pom"]
+				]
+			);
 		}
 	}
 	stage ('DockerBuild Image'){
