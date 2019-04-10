@@ -50,7 +50,7 @@ node {
         // app.push("latest")
         } 
 		
-		echo "~~~~~ push to docker hub done~~~~"
+		echo "~~~~~ push to docker hub done~~>>"
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
