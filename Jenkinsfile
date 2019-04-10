@@ -2,17 +2,9 @@
 node {
 	def mvnHome	
 	def methods = new libraryFunctions() 
-	// This can be nexus3 or nexus2
-	def NEXUS_VERSION = "nexus3"
-	// This can be http or https
-	def NEXUS_PROTOCOL = "http"
-	// Where your Nexus is running
-	def NEXUS_URL = "ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081"
-	// Repository where we will upload the artifact
-	def NEXUS_REPOSITORY = "DXP-SNAPSHOT"
-	// Jenkins credential id to authenticate to Nexus OSS
-	def NEXUS_CREDENTIAL_ID = "nexus-credentials-dxp"
-	
+	// Get the Maven tool.
+	mvnHome = tool 'mvn3.6'
+		
 	stage ('clean') {
 		
 		sh 'bash stopContainer.sh' 		
@@ -27,6 +19,13 @@ node {
 		checkoutFromRepo(repo)
 
 	}
+	stage('SonarQube analysis') {
+		withSonarQubeEnv('My SonarQube Server') {
+			//sh 'mvn clean package sonar:sonar'
+			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
+			sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
+		} // SonarQube taskId is automatically attached to the pipeline context
+	}	
 	stage("Quality Gate"){
 		timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
 			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
@@ -35,16 +34,12 @@ node {
 			}
 		}
 	}
-	stage('Build') {
-
-		// Get the Maven tool.
-		mvnHome = tool 'mvn3.6'
-
+	//stage('Build') {
 		// Run the maven builds		
-		mavenBuild(mvnHome)
-		sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
+		//mavenBuild(mvnHome)
+		//sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 		
-	}
+	//}
 	stage('publish to nexus'){
 		//publishNexus(NEXUS_VERSION,NEXUS_PROTOCOL,NEXUS_URL,NEXUS_REPOSITORY,NEXUS_CREDENTIAL_ID)
 		publishNexus()
