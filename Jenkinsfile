@@ -20,7 +20,7 @@ node {
 
 	}
 	stage('SonarQube analysis') {
-		withSonarQubeEnv('My SonarQube Server') {
+		withSonarQubeEnv('sonar') {
 			//sh 'mvn clean package sonar:sonar'
 			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
 			sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
