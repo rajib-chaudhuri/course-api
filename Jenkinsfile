@@ -28,7 +28,7 @@ node {
 		} // SonarQube taskId is automatically attached to the pipeline context
 	}	
 	stage("Quality Gate"){
-		echo "~~~Quality Gate starts ~~~~~"
+		echo "~~~Quality Gate starts ~~~~"
 		timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
 			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
 			
