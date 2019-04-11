@@ -33,7 +33,7 @@ node {
 			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
 			
 			echo "----status---->>>> ${qg.status}"			
-			if (qg.status == 'OK') {
+			if (qg.status != 'OK' || qg.status != 'SUCCESS') {
 				error "Pipeline aborted due to quality gate failure: ${qg.status}"
 			}
 		}
