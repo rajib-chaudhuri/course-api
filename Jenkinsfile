@@ -20,6 +20,7 @@ node {
 
 	}
 	stage('SonarQube analysis') {
+		echo "~~~SonarQube analysis starts ~~~~~"
 		withSonarQubeEnv('dxp sonarqube server') {
 			//sh 'mvn clean package sonar:sonar'
 			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
@@ -27,8 +28,11 @@ node {
 		} // SonarQube taskId is automatically attached to the pipeline context
 	}	
 	stage("Quality Gate"){
+		echo "~~~Quality Gate starts ~~~~~"
 		timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
 			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+			echo "~~nxusVersion-->>> ${nxusVersion}
+			echo "---task id >>>${qg.id}"
 			if (qg.status != 'OK') {
 				error "Pipeline aborted due to quality gate failure: ${qg.status}"
 			}
