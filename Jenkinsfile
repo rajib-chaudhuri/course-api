@@ -27,17 +27,7 @@ node {
 			sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 		} // SonarQube taskId is automatically attached to the pipeline context
 	}	
-	stage("Quality Gate"){
-		echo "~~~Quality Gate starts ~~~~"
-		timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-			
-			echo "---task id >>>${qg.id}"
-			if (qg.status != 'OK') {
-				error "Pipeline aborted due to quality gate failure: ${qg.status}"
-			}
-		}
-	}
+	
 	//stage('Build') {
 		// Run the maven builds		
 		//mavenBuild(mvnHome)
