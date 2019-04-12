@@ -6,8 +6,8 @@ node {
 	mvnHome = tool 'mvn3.6'
 		
 	stage ('clean') {
-		//stopDockerContainer()
-		sh 'bash stopContainer.sh' 		
+		stopDockerContainer()
+		//sh 'bash stopContainer.sh' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
