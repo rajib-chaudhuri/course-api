@@ -6,7 +6,7 @@ node {
 	mvnHome = tool 'mvn3.6'
 	def applicationName='CourseApi'
 	stage ('clean') {
-		sh 'echo ${applicationName}'
+		sh "echo ${applicationName}"
 		sh 'bash stopContainer.sh ${applicationName}' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
