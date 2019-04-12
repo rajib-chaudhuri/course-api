@@ -63,7 +63,7 @@ node {
 		echo "~~~~~ DockerBuild deploy~~~~"
 		//sh 'chmod +x runContainer.sh'
 		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
-		runDockerContainer()
+		//runDockerContainer()
 		
 		//sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
 	}
