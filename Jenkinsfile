@@ -6,8 +6,8 @@ node {
 	mvnHome = tool 'mvn3.6'
 		
 	stage ('clean') {
-		stopDockerContainer()
-		//sh 'bash stopContainer.sh' 		
+		//stopDockerContainer()
+		sh 'bash stopContainer.sh' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
@@ -61,8 +61,8 @@ node {
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		//sh 'chmod +x runContainer.sh'
-		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
+		sh 'chmod +x runContainer.sh'
+		sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
 		//runDockerContainer()
 		
 		//sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
