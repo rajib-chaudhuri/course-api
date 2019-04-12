@@ -6,7 +6,7 @@ node {
 	mvnHome = tool 'mvn3.6'
 	def applicationName='CourseApi'
 	stage ('clean') {
-		sh "echo ${applicationName}"
+		sh "applicationName--->>>> echo ${applicationName}"
 		sh "bash stopContainer.sh ${applicationName}"
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
@@ -50,7 +50,9 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	
-		app = docker.build("suswan/course")		 
+		//app = docker.build("suswan/course")
+		app = docker.build("suswan/${applicationName}")		
+		
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
         //app.push("${env.BUILD_NUMBER}")
 		app.push("1.0")
@@ -61,8 +63,8 @@ node {
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		sh 'chmod +x runContainer.sh'
-		sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'	
+		sh "chmod +x runContainer.sh ${applicationName}"
+		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
 		
 		//sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
 	}
