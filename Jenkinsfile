@@ -6,21 +6,21 @@ node {
 	mvnHome = tool 'mvn3.6'
 		
 	stage ('clean') {
-		
-		sh 'bash stopContainer.sh' 		
+		stopDockerContainer()
+		//sh 'bash stopContainer.sh' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
 		echo "~~~docker cleaning done ~~~~~"
 	}
-	stage('Preparation') { // for display purposes
+	stage('Code checkout') { // for display purposes
 		// Get some code from a GitHub repository
 		def repo = "https://github.com/suswan-mondal/course-api.git"		
 		checkoutFromRepo(repo)
 
 	}
-	stage('SonarQube analysis') {
-		echo "~~~SonarQube analysis starts ~~~~~"
+	stage('Code quality analysis') {
+		echo "~~~Code quality analysis starts ~~~~~"
 		withSonarQubeEnv('dxp sonarqube server') {
 			//sh 'mvn clean package sonar:sonar'
 			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
@@ -61,8 +61,9 @@ node {
 	}
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
-		sh 'chmod +x runContainer.sh'
-		sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'	
+		//sh 'chmod +x runContainer.sh'
+		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
+		runDockerContainer()
 		
 		//sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
 	}
