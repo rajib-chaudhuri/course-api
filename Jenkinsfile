@@ -4,10 +4,10 @@ node {
 	def methods = new libraryFunctions() 
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
-		
+	def applicationName='CourseApi'
 	stage ('clean') {
-		stopDockerContainer()
-		//sh 'bash stopContainer.sh' 		
+		
+		sh 'bash stopContainer.sh ${applicationName}' 		
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
@@ -20,7 +20,7 @@ node {
 
 	}
 	stage('Code quality analysis') {
-		echo "~~~Code quality analysis starts ~~~~~"
+		echo "~~~SonarQube analysis starts ~~~~~"
 		withSonarQubeEnv('dxp sonarqube server') {
 			//sh 'mvn clean package sonar:sonar'
 			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
@@ -62,8 +62,7 @@ node {
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
 		sh 'chmod +x runContainer.sh'
-		sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
-		//runDockerContainer()
+		sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'	
 		
 		//sh 'docker run --name  CourseApiContainer -p 80:8090 suswan/course'
 	}
