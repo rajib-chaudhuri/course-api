@@ -7,7 +7,7 @@ node {
 	def applicationName='CourseApi'
 	stage ('clean') {
 		sh "echo ${applicationName}"
-		sh 'bash stopContainer.sh ${applicationName}' 		
+		sh "bash stopContainer.sh ${applicationName}"
 		sh 'docker system prune -a --volumes -f'
 		sh 'docker container prune -f'
 		sh 'docker image prune -a -f'
