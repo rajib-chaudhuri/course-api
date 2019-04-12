@@ -4,7 +4,7 @@ node {
 	def methods = new libraryFunctions() 
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
-	def applicationName='CourseApi'
+	def applicationName='courseapi'
 	stage ('clean') {
 		echo "applicationName---  ${applicationName}"
 		sh "bash stopContainer.sh ${applicationName}"

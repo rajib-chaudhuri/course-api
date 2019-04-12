@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run --name  CourseApiContainer -p 80:8090 suswan/CourseApi
+docker run --name  courseapiContainer -p 80:8090 suswan/courseapi
