@@ -12,3 +12,4 @@ if(docker rm $applicationName'Container' >/dev/null 2>&1); then
 else
 	echo "docker container could not be removed ---not exist"	
 fi
+ 
