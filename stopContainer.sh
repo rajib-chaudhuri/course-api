@@ -1,7 +1,10 @@
 #!/bin/sh
-applicationName=$1
-echo "applicationName -->>> $applicationName"
-if [applicationName =="suswan" ]
+a=10
+b=20
+
+if [ $a == $b ]
 then
-echo Hey that is a large number.
+   echo "a is equal to b"
+else
+   echo "a is not equal to b"
 fi
