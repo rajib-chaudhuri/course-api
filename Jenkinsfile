@@ -5,6 +5,12 @@ node {
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
 	def applicationName='courseapi'
+	stage('Code checkout') {
+		// Get some code from a GitHub repository
+		def repo = "https://github.com/suswan-mondal/course-api.git"		
+		checkoutFromRepo(repo)
+
+	}
 	stage ('clean') {
 		echo "applicationName---  ${applicationName}"
 		sh "bash stopContainer.sh ${applicationName}"
@@ -13,12 +19,7 @@ node {
 		sh 'docker image prune -a -f'
 		echo "~~~docker cleaning done ~~~~~"
 	}
-	stage('Code checkout') { // for display purposes
-		// Get some code from a GitHub repository
-		def repo = "https://github.com/suswan-mondal/course-api.git"		
-		checkoutFromRepo(repo)
-
-	}
+	
 	stage('Code quality analysis') {
 		echo "~~~SonarQube analysis starts ~~~~~"
 		withSonarQubeEnv('dxp sonarqube server') {
@@ -46,7 +47,8 @@ node {
 	//}
 	stage('publish to nexus'){
 		//publishNexus(NEXUS_VERSION,NEXUS_PROTOCOL,NEXUS_URL,NEXUS_REPOSITORY,NEXUS_CREDENTIAL_ID)
-		publishNexus()
+		def NEXUS_REPOSITORY = 'DXP-SNAPSHOT'	
+		publishNexus(NEXUS_REPOSITORY)
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	

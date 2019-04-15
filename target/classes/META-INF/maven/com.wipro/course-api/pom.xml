@@ -5,6 +5,7 @@
 	<artifactId>course-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>course api</name>
+	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -16,8 +17,27 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
-	
+	<distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081/repository/DXP-RELEASE/</url>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Snapshot Releases</name>
+            <url>http://ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081/repository/DXP-SNAPSHOT/</url>
+        </snapshotRepository>
+    </distributionManagement>
 	<properties>
 		<java-verion>1.8</java-verion>
 	</properties>
+	<build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+	</plugins>
+</build>
 </project>
