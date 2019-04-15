@@ -8,7 +8,7 @@ node {
 	stage('Code checkout') {
 		// Get some code from a GitHub repository
 		def repo = "https://github.com/suswan-mondal/course-api.git"		
-		checkoutFromRepo(repo)
+		checkoutFromRepo(repo) 
 
 	}
 	stage ('clean') {
