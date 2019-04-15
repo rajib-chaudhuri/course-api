@@ -20,7 +20,7 @@ node {
 		
 		//sh 'docker container prune -f' //remove all stopped containers
 		sh 'docker image prune -a -f' // remove dangled (that is not tagged and is not used by any container) and unused images
-		sh 'docker volume prune -f' // remove all unused volumes
+		//sh 'docker volume prune -f' // remove all unused volumes
 		echo "~~~docker cleaning done ~~~~~ "
 	}
 	
