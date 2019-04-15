@@ -1,9 +1,14 @@
 #!/bin/sh
-a=10
-b=20
-if [ $a == $b ]
-then
-   echo "a is equal to b"
+
+applicationName=$1
+if(docker stop $applicationName'Container' >/dev/null 2>&1); then
+	echo "$applicationName docker container stopped"	
 else
-   echo "a is not equal to b"
+	echo "docker container could not be stopped ---not exist"	
+fi
+
+if(docker rm $applicationName'Container' >/dev/null 2>&1); then
+	echo "$applicationName docker container removed"	
+else
+	echo "docker container could not be removed ---not exist"	
 fi
