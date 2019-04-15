@@ -13,6 +13,8 @@ node {
 	}
 	stage ('clean') {
 		echo "applicationName---  ${applicationName}"
+		sh "sudo su"
+		sh "whoami"
 		sh "bash stopContainer.sh ${applicationName}"
 		//sh 'docker system prune -a --volumes -f'
 		//sh 'docker container prune -f'
