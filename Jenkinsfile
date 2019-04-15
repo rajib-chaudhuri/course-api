@@ -5,20 +5,25 @@ node {
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
 	def applicationName='courseapi'
-	stage ('clean') {
-		echo "applicationName---  ${applicationName}"
-		sh "bash stopContainer.sh ${applicationName}"
-		sh 'docker system prune -a --volumes -f'
-		sh 'docker container prune -f'
-		sh 'docker image prune -a -f'
-		echo "~~~docker cleaning done ~~~~~"
-	}
-	stage('Code checkout') { // for display purposes
+	stage('Code checkout') {
 		// Get some code from a GitHub repository
 		def repo = "https://github.com/suswan-mondal/course-api.git"		
 		checkoutFromRepo(repo)
 
 	}
+	stage ('clean') {
+		echo "applicationName---  ${applicationName}"
+		sh "bash stopContainer.sh ${applicationName}"
+		//sh 'docker system prune -a --volumes -f'
+		//sh 'docker container prune -f'
+		//sh 'docker image prune -a -f'
+		
+		//sh 'docker container prune -f' //remove all stopped containers
+		sh 'docker image prune -a -f' // remove dangled (that is not tagged and is not used by any container) and unused images
+		sh 'docker volume prune -f' // remove all unused volumes
+		echo "~~~docker cleaning done ~~~~~"
+	}
+	
 	stage('Code quality analysis') {
 		echo "~~~SonarQube analysis starts ~~~~~"
 		withSonarQubeEnv('dxp sonarqube server') {
@@ -46,7 +51,8 @@ node {
 	//}
 	stage('publish to nexus'){
 		//publishNexus(NEXUS_VERSION,NEXUS_PROTOCOL,NEXUS_URL,NEXUS_REPOSITORY,NEXUS_CREDENTIAL_ID)
-		publishNexus()
+		def NEXUS_REPOSITORY = 'DXP-SNAPSHOT'	
+		publishNexus(NEXUS_REPOSITORY)
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	
