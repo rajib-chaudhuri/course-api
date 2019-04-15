@@ -4,7 +4,7 @@ echo "applicationName---->>$applicationName"
 if(docker stop "$applicationName"'Container' >/dev/null 2>&1); then
 	echo "$applicationName docker container stopped"
 else
-	echo "docker container cannot be stopped"
+	echo "docker container cannot be stopped  ---not exist"
 fi
 
 if(docker rm $applicationName'Container' >/dev/null 2>&1); then
