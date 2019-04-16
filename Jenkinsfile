@@ -56,13 +56,11 @@ node {
 	}
 	stage ('DockerBuild Image'){
 		echo "~~~~~ DockerBuild Images~~~~"	
-		//app = docker.build("suswan/course")
 		app = docker.build("suswan/${applicationName}")		
 		
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
         //app.push("${env.BUILD_NUMBER}")
 		app.push("1.0")
-        // app.push("latest")
         } 
 		
 		echo "~~~~~ push to docker hub done~~~~"
@@ -70,7 +68,7 @@ node {
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
 		sh "chmod +x runContainer.sh"
-		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
+		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 && tail -f /dev/null"
 		//sh 'chmod +x runContainer.sh'
 		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
 		
