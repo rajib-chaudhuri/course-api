@@ -68,7 +68,7 @@ node {
 	stage('DockerBuild run'){
 		echo "~~~~~ DockerBuild deploy~~~~"
 		sh "chmod +x runContainer.sh"
-		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 && tail -f /dev/null"
+		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
 		//sh 'chmod +x runContainer.sh'
 		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
 		
