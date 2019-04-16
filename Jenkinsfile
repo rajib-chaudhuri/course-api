@@ -1,7 +1,7 @@
 @Library('dxp-pipeline-library')_
 node {
 	def mvnHome	
-	def methods = new libraryFunctions() 
+	//def methods = new libraryFunctions() 
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
 	def applicationName='courseapi'
