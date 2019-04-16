@@ -9,15 +9,13 @@ node {
 		echo "==========================================DXP Pipeline Library checkout starts====================================================="
 		def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
 		checkoutFromRepo(dxpLibraryRepo)	
-		echo "==========================================DXP Pipeline Library checkout ends====================================================="
+		echo "===========================================DXP Pipeline Library checkout ends====================================================="
 	
 		echo "==========================================Project Code checkout starts====================================================="
 		// Get some code from a GitHub repository
 		def projectRepo = "https://github.com/suswan-mondal/course-api.git"		
 		checkoutFromRepo(projectRepo)		
 		echo "==========================================Project Code checkout ends====================================================="
-		
-		
 	}
 	stage ('clean') {
 		echo "==========================================Docker image / container clean starts====================================================="
