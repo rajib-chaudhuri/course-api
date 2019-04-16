@@ -86,6 +86,6 @@ node {
 		echo "~~~~~ Results~~~~"
 		// junit '**/target/surefire-reports/TEST-*.xml'
 		//archive 'target/*.jar'
-		hygieiaBuildPublishStep buildStatus: 'Success'
+		//hygieiaBuildPublishStep buildStatus: 'Success'
 	}
 }
