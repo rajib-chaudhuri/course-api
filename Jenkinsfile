@@ -13,8 +13,8 @@ node {
 		echo "==========================================Project Code checkout ends====================================================="
 		
 		echo "==========================================DXP Pipeline Library checkout starts====================================================="
-		def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
-		checkoutFromRepo(dxpLibraryRepo)	
+		//def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
+		//checkoutFromRepo(dxpLibraryRepo)	
 		echo "==========================================DXP Pipeline Library checkout ends====================================================="
 	}
 	stage ('clean') {
