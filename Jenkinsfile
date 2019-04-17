@@ -6,10 +6,10 @@ node {
 	mvnHome = tool 'mvn3.6'
 	def applicationName='courseapi'
 	stage('Code checkout') {
-		echo "==========================================DXP Pipeline Library checkout starts====================================================="
-		def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
-		checkoutFromRepo(dxpLibraryRepo)	
-		echo "===========================================DXP Pipeline Library checkout ends====================================================="
+		//echo "==========================================DXP Pipeline Library checkout starts====================================================="
+		//def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
+		//checkoutFromRepo(dxpLibraryRepo)	
+		//echo "===========================================DXP Pipeline Library checkout ends====================================================="
 	
 		echo "==========================================Project Code checkout starts====================================================="
 		// Get some code from a GitHub repository
@@ -17,10 +17,11 @@ node {
 		checkoutFromRepo(projectRepo)		
 		echo "==========================================Project Code checkout ends====================================================="
 	}
-	stage ('clean') {
+	stage ('Docker image / container clean') {
 		echo "==========================================Docker image / container clean starts====================================================="
 		echo "applicationName---  ${applicationName}"
-		sh "bash stopContainer.sh ${applicationName}"
+		//sh "bash stopContainer.sh ${applicationName}"
+		sh "bash /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/stopContainer.sh ${applicationName}"
 		sh 'docker system prune -a --volumes -f'
 		//sh 'docker container prune -f'
 		//sh 'docker image prune -a -f'
@@ -78,8 +79,10 @@ node {
 	}
 	stage('DockerImage run'){
 		echo "==========================================DockerImage run starts====================================================="
-		sh "chmod +x runContainer.sh"
-		sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
+		//sh "chmod +x runContainer.sh"
+		//sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
+		sh "chmod +x /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/runContainer.sh"
+		sh "bash  /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/runContainer.sh ${applicationName}"
 		//sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 && tail -f /dev/null"
 		//sh 'chmod +x runContainer.sh'
 		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
