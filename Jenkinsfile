@@ -6,11 +6,6 @@ node {
 	mvnHome = tool 'mvn3.6'
 	def applicationName='courseapi'
 	stage('Code checkout') {
-		//echo "==========================================DXP Pipeline Library checkout starts====================================================="
-		//def dxpLibraryRepo = "https://github.com/suswan-mondal/dxp-pipeline-library.git"
-		//checkoutFromRepo(dxpLibraryRepo)	
-		//echo "===========================================DXP Pipeline Library checkout ends====================================================="
-	
 		echo "==========================================Project Code checkout starts====================================================="
 		// Get some code from a GitHub repository
 		def projectRepo = "https://github.com/suswan-mondal/course-api.git"		
@@ -102,6 +97,6 @@ node {
 		echo "~~~~~ Results~~~~"
 		// junit '**/target/surefire-reports/TEST-*.xml'
 		//archive 'target/*.jar'
-		//hygieiaBuildPublishStep buildStatus: 'Success'
+		hygieiaBuildPublishStep buildStatus: 'Success'
 	}
 }
