@@ -77,8 +77,12 @@ node {
 		echo "==========================================DockerImage run starts====================================================="
 		//sh "chmod +x runContainer.sh"
 		//sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 &"
+		
+		def publishPort=80
+		def applicationPort=8090
 		sh "chmod +x /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/runContainer.sh"
-		sh "bash  /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/runContainer.sh ${applicationName}"
+		sh "bash  /var/lib/jenkins/workspace/${applicationName}@libs/dxp-pipeline-library/vars/runContainer.sh ${applicationName} ${publishPort} ${applicationPort}"
+		//sh "bash  /var/lib/jenkins/workspace/dxpcommerce@libs/dxp-pipeline-library/vars/runContainer.sh ${applicationName}"
 		//sh "nohup ./runContainer.sh ${applicationName} > /dev/null 2>&1 && tail -f /dev/null"
 		//sh 'chmod +x runContainer.sh'
 		//sh 'nohup ./runContainer.sh > /dev/null 2>&1 &'
