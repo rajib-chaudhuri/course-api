@@ -31,7 +31,8 @@ node {
 		echo "==========================================Code quality analysis starts====================================================="
 		withSonarQubeEnv('dxp sonarqube server') {
 			//sh 'mvn clean package sonar:sonar'
-			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
+			//sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package sonar:sonar"
+			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore  clean package sonar:sonar"
 			sh 'cp /var/lib/jenkins/workspace/dxpcommerce/target/course-api-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/dxpcommerce' 
 		} // SonarQube taskId is automatically attached to the pipeline context
 		echo "==========================================Code quality analysis ends====================================================="
