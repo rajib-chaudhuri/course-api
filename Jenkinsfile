@@ -4,7 +4,7 @@ node {
 	//def methods = new libraryFunctions() 
 	// Get the Maven tool.
 	mvnHome = tool 'mvn3.6'
-	def applicationName='courseapi'
+	def applicationName='course api'
 	stage('Code checkout') {
 		echo "==========================================Project Code checkout starts====================================================="
 		// Get some code from a GitHub repository
