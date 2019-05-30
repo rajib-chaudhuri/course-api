@@ -83,16 +83,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.wipro.dxp</groupId>
-			<artifactId>common-utilities</artifactId>
-			<version>0.0.1-20190426.102201-2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.logstash.logback</groupId>
-			<artifactId>logstash-logback-encoder</artifactId>
-			<version>4.11</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -133,11 +123,6 @@
 		</repository>
 	</repositories>
 	<distributionManagement>
-		<repository>
-			<id>deployment</id>
-			<name>Internal Releases</name>
-			<url>http://ec2-3-9-21-107.eu-west-2.compute.amazonaws.com:8081/repository/DXP-RELEASE/</url>
-		</repository>
 		<snapshotRepository>
 			<id>deployment</id>
 			<name>Internal Snapshot Releases</name>
